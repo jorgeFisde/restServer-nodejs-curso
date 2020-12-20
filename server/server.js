@@ -1,48 +1,32 @@
 // archivo de configuracion global 
 require('./config/config');
-
-const express    = require('express');
+const mongoose = require('mongoose');
+const express = require('express');
 const bodyParser = require('body-parser');
-const app        = express();
+const app = express();
 
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
- 
+
 // parse application/json
 app.use(bodyParser.json())
 
 
-app.get('/usuario', (req,res) => {
+// IMPORTACION DE RUTAS
+app.use(require('./routes/usuario'));
 
-    res.json('get Usuario');
+mongoose.connect( process.env.URL_DB ,
+    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
+    (err, res) => {
 
-})
+        if (err) throw new Error(`Ha ocurrido un error: ${err}`);
 
-app.post('/usuario', (req,res) => {
+        console.log(`Base de datos ONLINE`);
 
-    let body = req.body;
-
-    res.json({
-        body
     });
 
-})
 
-app.put('/usuario/:id', (req,res) => {
-
-    let id = req.params.id;
-
-    res.json({
-        id
-    });
-
-})
-app.delete('/usuario', (req,res) => {
-
-    res.json('delete Usuario');
-
-})
 
 
 app.listen(process.env.PORT, () => {
