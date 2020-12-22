@@ -1,13 +1,15 @@
 const Usuario = require('../models/usuario');
 
 const express = require('express');
-const bcrypt = require('bcrypt');
-const _ = require('underscore');
+const bcrypt  = require('bcrypt');
+const _       = require('underscore');
+
+const { verificaToken, verificaRolUsuario } = require('../middlewares/autorizacion');
 
 const app = express();
 
 
-app.get('/usuario', (req, res) => {
+app.get('/usuario', [ verificaToken, verificaRolUsuario ], (req, res) => {
 
     let desde = Number(req.query.desde) || 0;
     let limite = Number(req.query.limite) || 5;
@@ -23,7 +25,7 @@ app.get('/usuario', (req, res) => {
                     err
                 })
             }
-            Usuario.count({ estado: true }, (err, conteo) => {
+            Usuario.countDocuments({ estado: true }, (err, conteo) => {
                 res.json({
                     ok: true,
                     total: conteo,
@@ -36,7 +38,7 @@ app.get('/usuario', (req, res) => {
 
 })
 
-app.post('/usuario', async (req, res) => {
+app.post('/usuario', [ verificaToken, verificaRolUsuario ], async (req, res) => {
 
     let body = req.body;
 
@@ -65,7 +67,7 @@ app.post('/usuario', async (req, res) => {
 
 })
 
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id', [ verificaToken, verificaRolUsuario ], (req, res) => {
 
     let id = req.params.id;
     // FUNCION PICK DE UNDERSCORE QUE REGRESA UN OBJETO SOLO CON LO QUE YO LE PIDO EN EL ARREGLO DE LLAVES
@@ -90,7 +92,7 @@ app.put('/usuario/:id', (req, res) => {
 })
 
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [ verificaToken, verificaRolUsuario ], (req, res) => {
 
     let id = req.params.id;
     // FUNCION PICK DE UNDERSCORE QUE REGRESA UN OBJETO SOLO CON LO QUE YO LE PIDO EN EL ARREGLO DE LLAVES

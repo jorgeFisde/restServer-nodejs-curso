@@ -44,3 +44,24 @@ if (process.env.NODE_ENV === 'dev') {
 
 process.env.URL_DB = linkDB;
 
+
+/**
+ * 
+ * 
+ *     vencimiento del token 
+ * 
+ */
+ // expiracion en 30 dias -segundos - minutos- -horas -dias
+ process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+
+ /**
+ * 
+ * 
+ *     SEED de autenticacion 
+ * 
+ */
+process.env.SEED = process.env.SEED || 'secret-key-desarrollo';
+
+
+

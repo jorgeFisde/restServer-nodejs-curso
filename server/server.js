@@ -14,7 +14,10 @@ app.use(bodyParser.json())
 
 
 // IMPORTACION DE RUTAS
-app.use(require('./routes/usuario'));
+app.use(require('./routes/routes.index'));
+
+
+
 
 mongoose.connect( process.env.URL_DB ,
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
