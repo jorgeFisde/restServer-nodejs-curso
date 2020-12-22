@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'dev') {
 
 } else {
 
-    linkDB = 'mongodb+srv://skywalker:DSadoiLV5aButT3X@cluster0.4396x.mongodb.net/cafe'
+    linkDB = process.env.MONGO_URL;
 
 }
 
