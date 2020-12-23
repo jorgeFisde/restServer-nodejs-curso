@@ -64,4 +64,12 @@ process.env.URL_DB = linkDB;
 process.env.SEED = process.env.SEED || 'secret-key-desarrollo';
 
 
+/**
+ * 
+ *      Google Client ID
+ * 
+ */
+
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '995797483734-p8slgbbin0u19bosejvp9ajvdlrdff7i.apps.googleusercontent.com';
 
