@@ -25,7 +25,7 @@ app.use(require('./routes/routes.index'));
 
 
 mongoose.connect( process.env.URL_DB ,
-    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
+    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false },
     (err, res) => {
 
         if (err) throw new Error(`Ha ocurrido un error: ${err}`);

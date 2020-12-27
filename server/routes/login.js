@@ -93,14 +93,17 @@ async function verify(token) {
 app.post('/google', async (req, res) => {
 
     let body = req.body;
+    let usuarioGoogle;
 
-    let usuarioGoogle = await verify(body.idtoken)
-        .catch(err => {
-            throw res.status(401).json({
-                ok: false,
-                err
-            });
+    try {
+        usuarioGoogle = await verify(body.idtoken)
+    } catch (err) {
+        return res.status(401).json({
+            ok:false,
+            err
         });
+    }
+        
 
 
     Usuario.findOne({ email: usuarioGoogle.email }, async (err, usuarioDB) => {
