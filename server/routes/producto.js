@@ -189,7 +189,7 @@ app.post('/productos', verificaToken, async (req, res) => {
         precioUni: body.precioUni,
         descripcion: body.descripcion,
         disponible: true,
-        categoria: idCategoria,
+        categoria: idCategoria.id,
         usuario: idUsuario
     });
 
@@ -321,7 +321,7 @@ const obtenerIdCat = async (name) => {
             return {
                 ok: false,
                 err: {
-                    message: 'No se encontraron coincidencias'
+                    message: `No se encontró ninguna categoria con el nombre=${name}`
                 }
             }
         }
